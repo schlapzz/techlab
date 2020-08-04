@@ -6,10 +6,14 @@ pipeline {
         timestamps()  // Timestamper Plugin
         disableConcurrentBuilds()
     }
+    environment{
+        GRETINGS_TO = 'Jenkins Techlab'
+    }
     stages {
         stage('Greeting') {
             steps {
-                echo 'Hello, World!'
+                echo "Hello ${env.GREETINGS_TO}"
+                sh 'echo "Hello $GREETINGS_TO (from command)"'
             }
         }
     }
