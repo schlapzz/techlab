@@ -7,7 +7,7 @@ pipeline {
         disableConcurrentBuilds()
     }
     environment{
-        GRETINGS_TO = 'Jenkins Techlab'
+        GREETINGS_TO = 'Jenkins Techlab'
     }
     stages {
         stage('Greeting') {
