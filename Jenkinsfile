@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                    echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL} in company ${parameter.company_parameter}"
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL} in company ${params.company_parameter}"
             }
         }
     }
