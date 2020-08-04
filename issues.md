@@ -2,6 +2,9 @@
 - Docker Compose --> restart always oder Hinweis bei reboot 
 
 ##General 
+- Log vs. Console naming
+- 
+
 
 ##Lab 4
 
