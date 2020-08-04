@@ -15,5 +15,10 @@ pipeline {
                 echo 'Hello, ${params.Greeting_to}!'
             }
         }
+        stage('Testing'){
+            steps{
+                echo 'Run tests.....'
+            }
+        }
     }
 }
