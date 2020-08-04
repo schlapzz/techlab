@@ -6,6 +6,9 @@ pipeline {
         timestamps()  // Timestamper Plugin
         disableConcurrentBuilds()
     }
+    triggers{
+      cron('@midnight')
+    }
     stages {
         stage('Greeting') {
             steps {
