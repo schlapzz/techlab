@@ -7,7 +7,7 @@ pipeline {
         disableConcurrentBuilds()
     }
     triggers{
-      cron('@midnight')
+      cron('H/5 * * * *')
     }
     stages {
         stage('Greeting') {
