@@ -12,8 +12,7 @@ pipeline {
     stages {
         stage('Greeting') {
             steps {
-                echo "Hello ${env.GREETINGS_TO}"
-                sh 'echo "Hello $GREETINGS_TO (from command)"'
+                echo "Hello Jenkins Techlab ${env.BUILD_ID}"
             }
         }
     }
