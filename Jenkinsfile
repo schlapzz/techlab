@@ -1,3 +1,5 @@
+@Library('jenkins-techlab-libraries') _
+
 pipeline {
     agent any // with hosted env use agent { label env.JOB_NAME.split('/')[0] }
     options {
@@ -7,7 +9,7 @@ pipeline {
     }
     tools {
         jdk 'jdk8'
-        maven 'maven35' //maven
+        maven 'maven35'
     }
     stages {
         stage('Build') {
@@ -17,20 +19,14 @@ pipeline {
             }
             post {
                 always {
-                    junit 'target/**/*.xml'  // Requires JUnit plugin  
+                    junit 'target/**/*.xml'  // Requires JUnit plugin
                 }
             }
         }
     }
     post {
-        success {
-            rocketSend server: 'https://chat.puzzle.ch', avatar: 'https://chat.puzzle.ch/emoji-custom/success.png', channel: 'jenkins-techlab', message: "Build success - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", rawMessage: true
-        }
-        unstable {
-            rocketSend server: 'https://chat.puzzle.ch', avatar: 'https://chat.puzzle.ch/emoji-custom/unstable.png', channel: 'jenkins-techlab', message: "Build unstable - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", rawMessage: true
-        }
-        failure {
-            rocketSend server: 'https://chat.puzzle.ch', avatar: 'https://chat.puzzle.ch/emoji-custom/failure.png', channel: 'jenkins-techlab', message: "Build failure - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", rawMessage: true
+        always {
+            notifyPuzzleChat('jenkins-techlab')
         }
     }
 }
