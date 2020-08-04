@@ -19,7 +19,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'target/**/*.xml'  // Requires JUnit plugin?
+                    junit 'target/**/*.xml'  // Requires JUnit plugin? trigger
                 }
             }
         }
