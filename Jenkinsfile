@@ -7,7 +7,7 @@ pipeline {
         disableConcurrentBuilds()
     }
     tools{
-        jdk 'jdk11'
+        jdk 'jdk13'
         maven 'maven35'
     }
      stages {
