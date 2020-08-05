@@ -14,6 +14,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'printenv'
+                sh 'ls /home/jenkins/tools/hudson.model.JDK/jdk13/java-se-11/'
                 echo '$JAVA_HOME/bin/javac -version'
                 echo "start..... triggger trigger"
                 sh 'mvn -B -V -U -e clean verify -Dsurefire.useFile=false -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts'
