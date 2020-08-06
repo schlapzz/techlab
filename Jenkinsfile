@@ -7,12 +7,13 @@ pipeline {
         disableConcurrentBuilds()
     }
     tools{
-        jdk 'java9'
+        jdk 'jdk8'
         maven 'maven35'
     }
      stages {
         stage('Build') {
             steps {
+                sh 'apt-get install ca-certificates-java'
                 sh 'printenv'
                 sh '$JAVA_HOME/bin/javac -version'
                 echo "start..... triggger trigger"
