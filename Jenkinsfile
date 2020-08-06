@@ -13,7 +13,6 @@ pipeline {
      stages {
         stage('Build') {
             steps {
-                sh 'printenv'
                 sh '$JAVA_HOME/bin/javac -version'
                 sh 'mvn -B -V -U -e clean verify -Dsurefire.useFile=false'
                 archiveArtifacts 'target/*.?ar'
