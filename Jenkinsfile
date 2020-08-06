@@ -22,7 +22,10 @@ pipeline {
                 sh 'mvn -B -V -U -e clean verify -Dsurefire.useFile=false'
                 sh "mvn -s '${M2_SETTINGS}' -B deploy:deploy-file -DrepositoryId='puzzle-releases' -Durl='${REPO_URL}' -DgroupId='com.puzzleitc.jenkins-techlab' -DartifactId='${ARTIFACT}' -Dversion='1.0' -Dpackaging='jar' -Dfile=`echo target/*.jar`"
                 sshagent(['testserver']) {  // SSH Agent Plugin
+                    sh 'ssh-keyscan -p 2222 openssh-server >> ~/.ssh/known_hosts'
                     sh "ls -l target"
+                    sh 'ssh -p 2222 puzzler@openssh-server "mkdir -p ~/jenkins-techlab/${ARTIFACT}/1.0/"' 
+                    sh "scp -p 2222 puzzler@openssh-server "
                     sh "ssh -o UserKnownHostsFile='${KNOWN_HOSTS}' -p 2222 richard@testserver.vcap.me 'curl -O -u \'${ARTIFACTORY}\' ${REPO_URL}/com/puzzleitc/jenkins-techlab/${ARTIFACT}/1.0/${ARTIFACT}-1.0.jar && ls -l'"
                 }
                 archiveArtifacts 'target/*.?ar'
