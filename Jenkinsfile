@@ -21,7 +21,7 @@ pipeline {
                 sshagent(['testserver']) {  // SSH Agent Plugin
                     sh 'ssh-keyscan -p 2222 openssh-server >> ~/.ssh/known_hosts'
                     sh "ls -l target"
-                    sh 'ssh -p 2222 puzzler@openssh-server "mkdir -p ~/jenkins-techlab/${ARTIFACT}/1.0/"' 
+                    sh 'sshpass -f <(printf '%s\n' password) ssh -p 2222 puzzler@openssh-server "mkdir -p ~/jenkins-techlab/${ARTIFACT}/1.0/"' 
                     sh "scp -p 2222 puzzler@openssh-server "
                     //sh "ssh -o UserKnownHostsFile='${KNOWN_HOSTS}' -p 2222 richard@testserver.vcap.me 'curl -O -u \'${ARTIFACTORY}\' ${REPO_URL}/com/puzzleitc/jenkins-techlab/${ARTIFACT}/1.0/${ARTIFACT}-1.0.jar && ls -l'"
                 }
