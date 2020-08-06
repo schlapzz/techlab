@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -V -U -e clean verify -Dsurefire.useFile=false'
+                sh 'mvn -B -V -U -e clean verify -Dsurefire.useFile=false -DargLine="-Djdk.net.URLClassPath.disableClassPathURLCheck=true"'
                 archiveArtifacts 'target/*.?ar'
             }
             post {
@@ -24,7 +24,7 @@ pipeline {
     }
     post {
         success {
-            rocketSend  message: "Build success! - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", rawMessage: true
+            rocketSend avatar: 'https://chat.puzzle.ch/emoji-custom/success.png', channel: 'jenkins-techlab', message: "Build success! - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", rawMessage: true
         }
         unstable {
             rocketSend  message: "Build unstable - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", rawMessage: true
