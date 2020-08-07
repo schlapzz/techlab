@@ -22,7 +22,7 @@ pipeline {
                     sh 'ssh-keyscan -p 2222 openssh-server > ~/.ssh/known_hosts'
                     sh 'ssh -p 2222 puzzler@openssh-server "whoami"'
                     sh 'ssh -p 2222 puzzler@openssh-server "mkdir -p ~/jenkins-techlab/${ARTIFACT}/1.0/"' 
-                    sh "scp -P 2222 puzzler@openssh-server "
+                    sh "scp -P 2222 target/\*.jar puzzler@openssh-server:~/jenkins-techlab/${ARTIFACT}/1.0/"
                     //sh "ssh -o UserKnownHostsFile='${KNOWN_HOSTS}' -p 2222 richard@testserver.vcap.me 'curl -O -u \'${ARTIFACTORY}\' ${REPO_URL}/com/puzzleitc/jenkins-techlab/${ARTIFACT}/1.0/${ARTIFACT}-1.0.jar && ls -l'"
                 }
                 archiveArtifacts 'target/*.?ar'
