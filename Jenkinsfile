@@ -21,6 +21,7 @@ pipeline {
                 sshagent(['artifact-ssh']) {  // SSH Agent Plugin
                     sh 'ssh-keyscan -p 2222 openssh-server >> ~/.ssh/known_hosts'
                     sh "ls -l target"
+                    sh 'cat ~/.ssh/known_hosts'
                     sh 'ssh -p 2222 puzzler@openssh-server "whoami"'
                     sh 'ssh -p 2222 puzzler@openssh-server "mkdir -p ~/jenkins-techlab/${ARTIFACT}/1.0/"' 
                     sh "scp -p 2222 puzzler@openssh-server "
